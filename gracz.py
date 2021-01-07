@@ -42,11 +42,11 @@ class Gracz(object):
         self.game.okno.blit(start, (
         (self.game.szer_okna / 2) - (self.game.wys_okna / 1.2), ((self.game.wys_okna / 2) - (start.get_height() / 2))))
 
-        self.zdjencie("assest/Icona1.png", 216 * 2, 1)
-        self.zdjencie("assest/Icona2.png", 216 * 1, 2)
-        self.zdjencie("assest/Icona3.png", 0, 3)
-        self.zdjencie("assest/Icona1.png", -216 * 1, 4)
-        self.zdjencie("assest/Icona1.png", -216 * 2, 5)
+        self.zdjencie("assest/IconaBrak.png", 216 * 2, 1)
+        self.zdjencie("assest/IconaBrak.png", 216 * 1, 2)
+        self.zdjencie("assest/IconaBrak.png", 0, 3)
+        self.zdjencie("assest/IconaBrak.png", -216 * 1, 4)
+        self.zdjencie("assest/IconaBrak.png", -216 * 2, 5)
         self.ruchstrzalki()
 
 
