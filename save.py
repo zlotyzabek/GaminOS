@@ -7,12 +7,23 @@ def init(file_txt):
     if plik.readable():
         pass
     else:
-        open(file_txt, "a")
+        plik = open(file_txt, "a")
+
 
 def read(file_txt, number_line):
-    read = linecache.getline (file_txt, number_line)
-    return read
-    plik.close()
+    file = open(file_txt, 'r').read()
+    lines = file.split('\n')
+    try:
+        if lines[number_line - 1] == (""):
+            return("")
+        else:
+            return lines[(number_line - 1)]
+
+    except Exception:
+        read = linecache.getline(file_txt, number_line)
+        return read
+
+    read.close()
 
 def write(file_txt, write):
     plik = codecs.open(file_txt, "a")
@@ -25,3 +36,6 @@ def number_lines(file_txt):
 
 def clear(file_txt):
     open(file_txt, "w+")
+
+init("assest/CmdRunIco/Ico1.cmd")
+print(read("assest/CmdRunIco/Ico1.cmd", 2))
