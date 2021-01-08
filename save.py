@@ -36,6 +36,3 @@ def number_lines(file_txt):
 
 def clear(file_txt):
     open(file_txt, "w+")
-
-init("assest/CmdRunIco/Ico1.cmd")
-print(read("assest/CmdRunIco/Ico1.cmd", 2))

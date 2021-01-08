@@ -1,3 +1,7 @@
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 import os
 import datetime
@@ -13,10 +17,6 @@ from gracz import Gracz
 import save
 
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
 class Game:
 
     def __init__(self):
@@ -30,7 +30,7 @@ class Game:
         self.prendkosc = 1.0
         self.skok = 10.0
         self.grawitacja = 2.0
-        self.czciaka = "Comic Sans MS"
+        self.czciakapod = "Comic Sans MS"
 
         pygame.init()
         pygame.font.init()
@@ -41,7 +41,7 @@ class Game:
         self.musicrun.play()
         self.tick = 0
         self.sekundy = 0
-        self.czciaka = pygame.font.SysFont(self.czciaka, 30)
+        self.czciaka = pygame.font.SysFont(self.czciakapod, 30)
         self.gracz = Gracz(self)
         self.delta = 0.0
         self.okno = pygame.display.set_mode((self.szer_okna, self.wys_okna))
@@ -60,20 +60,27 @@ class Game:
                 if event.type == pygame.QUIT:
                     sys.exit(0)
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_w and not self.strzalka == 5:
-                        self.strzalka += 1
-                    if event.key == pygame.K_s and not self.strzalka == 1:
-                        self.strzalka -= 1
-                    if event.key == pygame.K_d and self.strzalka == 1:
-                        self.wykonanie("assest/CmdRunIco/Ico1.cmd")
-                    if event.key == pygame.K_d and self.strzalka == 2:
-                        self.wykonanie("assest/CmdRunIco/Ico2.cmd")
-                    if event.key == pygame.K_d and self.strzalka == 3:
-                        self.wykonanie("assest/CmdRunIco/Ico3.cmd")
-                    if event.key == pygame.K_d and self.strzalka == 4:
-                        self.wykonanie("assest/CmdRunIco/Ico4.cmd")
-                    if event.key == pygame.K_d and self.strzalka == 5:
-                        self.wykonanie("assest/CmdRunIco/Ico5.cmd")
+                    if event.key == pygame.K_w or event.key == pygame.K_UP:
+                        if not self.strzalka == 5:
+                            self.strzalka += 1
+                    if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                        if not self.strzalka == 1:
+                            self.strzalka -= 1
+                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        if self.strzalka == 1:
+                            self.wykonanie("assest/CmdRunIco/Ico1.cmd")
+                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        if self.strzalka == 2:
+                            self.wykonanie("assest/CmdRunIco/Ico2.cmd")
+                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        if self.strzalka == 3:
+                            self.wykonanie("assest/CmdRunIco/Ico3.cmd")
+                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        if self.strzalka == 4:
+                            self.wykonanie("assest/CmdRunIco/Ico4.cmd")
+                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                        if self.strzalka == 5:
+                            self.wykonanie("assest/CmdRunIco/Ico5.cmd")
 
 
             self.delta += self.clock.tick() / 1000.0
@@ -107,7 +114,7 @@ class Game:
     def obiekty(self):
         self.gracz.obiekty()
 
-if __name__ == "__main__":
+if __name__ == "__main__" and sys.platform == "win32":
     Game()
 
 
