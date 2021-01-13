@@ -5,6 +5,7 @@ import linecache
 import codecs
 import base64
 
+
 class save():
 
     def __init__(self):
@@ -52,16 +53,40 @@ class save():
         plik.write(str(write) + "\n")
         plik.close()
 
+    def write_no_new_line(self, file_text, write):
+        plik = codecs.open(file_text, "a")
+        plik.write(str(write))
+        plik.close()
+
     def number_lines(self, file_text):
-        count = len(open(file_text, 'rU').readlines())
+        count = len(open(file_text, 'r').readlines())
         return count
 
     def clear(self, file_text):
         open(file_text, "w+")
 
+    def clear_and_write(self, file_text, write):
+        open(file_text, "w+")
+        plik = codecs.open(file_text, "a")
+        plik.write(str(write) + "\n")
+        plik.close()
 
+
+    def coppy_file(self, file_text, new_coppy_file_text):
+        number_yea = 1
+        for liczba in range(1, save.number_lines(file_text)):
+            number_yea +=1
+            save.write(new_coppy_file_text, save.read(file_text, liczba))
+        save.write_no_new_line(new_coppy_file_text, save.read(file_text, number_yea))
 
 class save_encrypted():
+
+    def init(self, file_text):
+        plik = open(file_text, "a")
+        if plik.readable():
+            pass
+        else:
+            plik = open(file_text, "a")
 
 
     def read(self, file_text, number_line):
@@ -80,7 +105,7 @@ class save_encrypted():
 
 
         except Exception:
-            read = linecache.getline(file_text, number_line)
+            read = base64.b64decode(linecache.getline(file_text, number_line)).decode()
 
             return read
     def read_no_init(self, file_text, number_line):
@@ -95,17 +120,35 @@ class save_encrypted():
         plik.close()
 
 
+    def clear_and_write(self, file_text, write):
+        open(file_text, "w+")
+        source = str(write).encode('utf-8')
+        content = base64.b64encode(source).decode('utf-8')
+        plik = codecs.open(file_text, "a")
+        plik.write(content + "\n")
+        plik.close()
+
+    def clear_and_write(self, file_text, write):
+        open(file_text, "w+")
+        source = str(write).encode('utf-8')
+        content = base64.b64encode(source).decode('utf-8')
+        plik = codecs.open(file_text, "a")
+        plik.write(content + "\n")
+        plik.close()
+
+
 TEST_MODE = 0
 if TEST_MODE == 1:
     save = save()
     save_e = save_encrypted()
-    save.init("TEST.TEST")
-    save.clear("TEST.TEST")
-    #save.write("TEST.TEST", "TEST")
-    #print(save.read("TEST.TEST", 1))
-    #print(save.number_lines("TEST.TEST"))
-    save_e.write("TEST.TEST", "123456789_QWERTYUIOPLKJHGFDSAZXCVBNM_qwertyuioplkjhgfdsazxcvbnm_łó€ęąśłńćźż_)!@#$%^&*()__-+=}]{[:;"'|\?/>.<,')
-    print(save_e.read("TEST.TEST", 1))
+   # save.init("TEST.TEST")
+    save.clear("NowaKopia.txt")
+   # save.write("TEST.TEST", "TEST")
+   # print(save.read("TEST.TEST", 1))
+   # save_e.write("TEST.TEST", "123456789_QWERTYUIOPLKJHGFDSAZXCVBNM_qwertyuioplkjhgfdsazxcvbnm_łó€ęąśłńćźż_)!@#$%^&*()__-+=}]{[:;"'|\?/>.<,')
+    #print(save_e.read("TEST.TEST", 2))
+   #print(save.number_lines("TEST.TEST"))
+    save.coppy_file("TEST.TEST", "NowaKopia.txt")
 
 
 
